@@ -25,7 +25,6 @@ The purpose of this project is to run the application logic on a large dataset a
 1. Clone the repository to a local folder (referred to as CLONE_LOCATION below):
    ```bash
    git clone https://github.com/tomhoskins/GoldyGopherApp.git
-   cd GoldyGopherApp
 2. Open GoldyGopherApp.sln in Visual Studio
 3. Set the Solution Configuration to Release
 4. Build the solution (Ctrl + Shift + B)
