@@ -64,7 +64,8 @@ namespace GoldyGopherUI
                 gopherListBinding.Clear();
                 gopherListBinding.Add("The lower bound must be less than the upper bound.");
             }
-            else if (Math.Abs(upperBound - lowerBound) > 10000)
+            // Double conversions to prevent overflow in range check
+            else if (Math.Abs((double)upperBound - (double)lowerBound) > 10000)
             {
                 gopherListBinding.Clear();
                 gopherListBinding.Add("The difference between the lower and upper bounds must be less than 10000. To run larger datasets, the ConsoleUI can be used to generate a CSV file.");
