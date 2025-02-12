@@ -35,5 +35,10 @@
                 return input.ToString();
             }
         }
+
+        public static bool ValidateBounds(int lowerBound, int upperBound)
+        {
+            return lowerBound < upperBound;
+        }
     }
 }

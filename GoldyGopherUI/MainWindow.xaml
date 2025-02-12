@@ -1,0 +1,59 @@
+﻿<Window x:Class="GoldyGopherUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GoldyGopherUI"
+        mc:Ignorable="d"
+        Title="Goldy Gopher by Tom Hoskins"
+        FontSize="16"
+        Height="450"
+        Width="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center" Foreground="#7A0019" FontSize="32" FontWeight="Bold">Goldy Gopher</TextBlock>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 10 0 10" FlowDirection="LeftToRight" Orientation="Vertical">
+                <TextBlock Text="Lower Bound:" Margin="10 0" Foreground="#7A0019"/>
+                <TextBox x:Name="lowerBoundText" Margin="10 0" Foreground="#7A0019" BorderBrush="#7A0019" HorizontalAlignment="Stretch" MaxWidth="140" TabIndex="1"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 10 0 10" Orientation="Vertical">
+                <TextBlock Text="Upper Bound:" Margin="10 0" Foreground="#7A0019"/>
+                <TextBox x:Name="upperBoundText" Margin="10 0"  Foreground="#7A0019" BorderBrush="#7A0019" HorizontalAlignment="Stretch" MaxWidth="140" TabIndex="2"/>
+            </StackPanel>
+            <Button x:Name="runButton" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 0" Background="#7A0019" Foreground="White" TabIndex="3" GotFocus="OnGotFocusHandler" LostFocus="OnLostFocusHandler" Click="runButton_Click">Run</Button>
+            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical">
+                <TextBlock Text="Output:" Margin="10 20 10 0" Foreground="#7A0019"/>
+                <ListBox x:Name="gopherListBox" Margin="10 0" Foreground="#7A0019" BorderBrush="#7A0019" Background="#FFDE7A" Height="200" Width="300" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap" FontSize="12"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,36 +1,41 @@
-﻿Console.WriteLine("Welcome to the Goldy Gopher App by Tom Hoskins");
+﻿using ConsoleUI;
+using System.Net.NetworkInformation;
+
+Console.WriteLine("Welcome to the Goldy Gopher CSV App by Tom Hoskins");
 Console.WriteLine();
 
 int lowerBound;
 int upperBound;
+bool continueRunning = true;
 
-while (true)
+do
 {
-	Console.WriteLine("Enter the lower bound of the range of numbers to check:");
-	if (!int.TryParse(Console.ReadLine(), out lowerBound))
-	{
-        Console.WriteLine("Please enter a valid integer value.");
-        continue;
-    }
+    lowerBound = ConsoleHelpers.RequestIntegerInputWithValidation("Enter the lower bound: ");
+    upperBound = ConsoleHelpers.RequestIntegerInputWithValidation("Enter the upper bound: ");
 
-    Console.WriteLine("Enter the upper bound of the range of numbers to check:");
-    if (!int.TryParse(Console.ReadLine(), out upperBound))
+    if (!GoldyGopherLibrary.Utilities.ValidateBounds(lowerBound, upperBound))
     {
-        Console.WriteLine("Please enter a valid integer value.");
+        ConsoleHelpers.WritePaddedLine("The lower bound must be less than the upper bound. Please try again.");
         continue;
     }
 
-    if (!(lowerBound < upperBound))
+    var fileName = "GoldyGopherData.csv";
+    var folderPath = ConsoleHelpers.RequestFolderPathForCsv();
+    var filePath = ConsoleHelpers.GetUniqueFilePath(folderPath, fileName);
+
+    var result = ConsoleHelpers.CreateGoldyGopherCsv(lowerBound, upperBound, filePath);
+
+    if (result == "Success")
     {
-        Console.WriteLine("The upper bound must be greater than the lower bound.");
-        continue;
+        ConsoleHelpers.WritePaddedLine($"CSV file created and data written successfully at {filePath}.");
     }
+    else
+    {
+        ConsoleHelpers.WritePaddedLine($"An error occurred: {result}");
+    }
+    continueRunning = ConsoleHelpers.DetermineIfRunningAgain();
 
-    break;
-}
+} while (continueRunning);
 
-for (int i = lowerBound; i <= upperBound; i++)
-{
-    var result = GoldyGopherLibrary.Utilities.GetGopherStringFromInt(i);
-    Console.WriteLine($"{i}: {result}");
-}
+Console.WriteLine("Program has finished executing. Press any key to close.");
+Console.ReadLine();
